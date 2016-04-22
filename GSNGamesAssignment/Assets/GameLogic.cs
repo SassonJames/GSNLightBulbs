@@ -6,6 +6,7 @@ public class GameLogic : MonoBehaviour
 {
 
     public List<GameObject> allLights;
+    public Material selectedMaterial;
     private int gameState;
     private int previousGameState;
     public Vector2 lightOne;
@@ -92,6 +93,7 @@ public class GameLogic : MonoBehaviour
         {
             float distance = 10000;
             Vector3 lightClickedPos = new Vector3();
+            GameObject selectedLight = null;
             foreach(GameObject light in allLights)
             {
                 float currentDist = Vector3.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), light.transform.position);
@@ -99,8 +101,10 @@ public class GameLogic : MonoBehaviour
                 {
                     lightClickedPos = light.transform.position;
                     distance = currentDist;
+                    selectedLight = light;
                 }
             }
+            selectedLight.GetComponent<MeshRenderer>().material = selectedMaterial;
             ChooseLight(lightClickedPos.x, lightClickedPos.y);
         }
     }

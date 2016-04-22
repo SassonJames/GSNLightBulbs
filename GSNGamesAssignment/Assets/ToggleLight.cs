@@ -3,30 +3,32 @@ using System.Collections;
 
 public class ToggleLight : MonoBehaviour {
 
-    private bool isLightOn;
+    public bool isLightOn;
     public Material onMaterial;
     public Material offMaterial;
 
 	// Use this for initialization
 	void Start () {
         isLightOn = false;
-	}
+        this.GetComponent<MeshRenderer>().material = offMaterial;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (isLightOn)
-        {
-            this.GetComponent<MeshRenderer>().material = onMaterial;
-        }
-        else
-        {
-            this.GetComponent<MeshRenderer>().material = offMaterial;
-        }
+
 	}
 
     public void SwitchLight()
     {
-        if (isLightOn) { isLightOn = false; }
-        else { isLightOn = true; }
+        if (isLightOn)
+        {
+            this.GetComponent<MeshRenderer>().material = offMaterial;
+            isLightOn = false;
+        }
+        else
+        {
+            this.GetComponent<MeshRenderer>().material = onMaterial;
+            isLightOn = true;
+        }
     }
 }
